@@ -21,8 +21,8 @@ def get_password_leaks_count(hashes, hash_to_check):
 
 def pwned_api_check(password):
     sha1password = hashlib.sha1(password.encode('utf-8')).hexdigest().upper()
-    first5_char, tail = sha1password[:5], sha1password[5:]
-    response = request_api_data(first5_char)
+    first5_char, tail = sha1password[:5], sha1password[5:]  
+    response = request_api_data(first5_char) #To keep password secure from sharing the whole thing. Splits the hash into the first 5 characters 
     return get_password_leaks_count(response, tail)
 
 
@@ -32,7 +32,7 @@ def main(args):
         if count:
             print(f'{password} was found {count} times... you should probably change your password')
         else:
-            print(f'{password} was NOT found.  Carry on!')
+            print(f'{password} was NOT found.  Great password!')
     return 'done!'
 
 if __name__ == '__main__':
